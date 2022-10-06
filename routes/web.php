@@ -22,3 +22,10 @@ Route::get('/', function () {
 Route::get('/about', [HomeController::class, 'index']);
 
 Route::post('/create', [MessageController::class, 'create']);
+
+# Ecommerce
+Route::view('/main', 'ecommerce.main');
+Route::view('/product', 'ecommerce.product');
+Route::view('/cart', 'ecommerce.cart');
+Route::view('/checkout', 'ecommerce.checkout');
+Route::view('/thankyou', 'ecommerce.thankyou');
