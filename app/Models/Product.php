@@ -7,5 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    use HasFactory;
+    private function asDollars($value) {
+        if ($value<0) return "-".asDollars(-$value);
+        return '$' . number_format($value, 2);
+      }
+
+    public function presentPrice()
+    {
+        return $this->asDollars($this -> price/100);
+
+    }
 }

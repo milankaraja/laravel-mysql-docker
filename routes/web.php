@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MessageController;
-
+use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\ShopController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,7 +16,7 @@ use App\Http\Controllers\MessageController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 });
 
@@ -24,8 +25,10 @@ Route::get('/about', [HomeController::class, 'index']);
 Route::post('/create', [MessageController::class, 'create']);
 
 # Ecommerce
-Route::view('/main', 'ecommerce.main');
-Route::view('/product', 'ecommerce.product');
+Route::get('/', [LandingPageController::class, 'index']);
+Route::get('/shop', [ShopController::class, 'index']);
+
+
 Route::view('/cart', 'ecommerce.cart');
 Route::view('/checkout', 'ecommerce.checkout');
 Route::view('/thankyou', 'ecommerce.thankyou');
