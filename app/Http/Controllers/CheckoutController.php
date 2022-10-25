@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Product;
 
-class ShopController extends Controller
+class CheckoutController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +13,8 @@ class ShopController extends Controller
      */
     public function index()
     {
-
-        $products = Product::inRandomOrder()->take(12)->get();
-        return view('ecommerce.shop')->with("products",$products);
+        //
+        return view('ecommerce.checkout');
     }
 
     /**
@@ -46,16 +44,9 @@ class ShopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show($id)
     {
-        $product = Product::where('slug',$slug)->firstOrFail();
-
-        $mightAlsoLike = Product::where('slug','!=', $slug)->mightAlsoLike()->get();
-
-        return view('ecommerce.product')->with([
-            'product'=> $product,
-            'mightAlsoLike' =>$mightAlsoLike
-        ]);
+        //
     }
 
     /**

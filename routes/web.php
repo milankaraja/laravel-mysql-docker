@@ -5,6 +5,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,10 +27,32 @@ Route::get('/about', [HomeController::class, 'index']);
 Route::post('/create', [MessageController::class, 'create']);
 
 # Ecommerce
-Route::get('/', [LandingPageController::class, 'index']);
-Route::get('/shop', [ShopController::class, 'index']);
+Route::get('/', [LandingPageController::class, 'index'])->name('landing-page');
+Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
+Route::get('/shop/{product}', [ShopController::class, 'show'])->name('shop.show');
+
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
+Route::delete('/cart/{product}', [CartController::class, 'destroy'])->name('cart.destroy');
+
+Route::get('empty', function() {
+    Cart::destroy();
+});
+
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 
 
-Route::view('/cart', 'ecommerce.cart');
-Route::view('/checkout', 'ecommerce.checkout');
 Route::view('/thankyou', 'ecommerce.thankyou');
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

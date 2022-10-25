@@ -19,13 +19,8 @@
     <body>
         <header class="with-background">
             <div class="top-nav container">
-                <div class="logo">Laravel Ecommerce</div>
-                <ul>
-                    <li><a href="#">Shop</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Cart</a></li>
-                </ul>
+                @include('ecommerce.partials.nav')
+
             </div> <!-- end top-nav -->
             <div class="hero container">
                 <div class="hero-copy">
@@ -67,8 +62,8 @@
                 <div class="products text-center">
                     @foreach ($products as $product)
                     <div class="product">
-                        <a href="#"><img src="/img/macbook-pro.png" alt="product"></a>
-                        <a href="#"><div class="product-name">{{$product->name}}</div></a>
+                        <a href="{{route('shop.show',$product->slug)}}"><img src="/img/macbook-pro.png" alt="product"></a>
+                        <a href="{{route('shop.show',$product->slug)}}"><div class="product-name">{{$product->name}}</div></a>
                         <div class="product-price">{{$product->presentPrice()}}</div>
                     </div>
                     @endforeach
@@ -76,7 +71,7 @@
                 </div> <!-- end products -->
 
                 <div class="text-center button-container">
-                    <a href="#" class="button">View more products</a>
+                    <a href="{{route('shop.index')}}" class="button">View more products</a>
                 </div>
 
             </div> <!-- end container -->

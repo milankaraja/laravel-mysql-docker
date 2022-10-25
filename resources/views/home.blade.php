@@ -1,42 +1,29 @@
-@extends('master')
 
-@section('title','Homepage')
+
+
+@extends('ecommerce.layout')
 
 @section('content')
 
+<div class="container">
+     @include('layouts.app')
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+            
+                <div class="card-header">{{ __('Dashboard') }}</div>
 
-Post Messages:
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
 
-
-<form action="/create" method="post">
-<input type="text" name="title" placeholder="Title">
-<input type="text" name="content" placeholder="Content">
-{{csrf_field()}}
-
- 
-<button type="submit">Submit</button>
-
-</form>
-
-
-<ul>
-<li> Twitter example</li>
-
- @foreach($messages as $message)
-
-<li>
-    <strong> {{$message -> title}} </strong>  <br>
-    {{$message -> content}}
-
-    <br>
-    {{ $message -> created_at}}
-</li>
-
- @endforeach 
-
-</ul>
-
-
-<h1>Content!</h1>
-
+                    {{ __('You are logged in!') }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
